@@ -2,6 +2,7 @@
 
 namespace App\Http\View\Composers\SocialMedia;
 
+use App\Module;
 use Illuminate\View\View;
 
 class Instagram
@@ -14,6 +15,7 @@ class Instagram
      */
     public function compose(View $view)
     {
-        $view->with('instagram', 'nuh_orun');
+        $modules= Module::where('active', 1)->get();
+        $view->with('modules', $modules);
     }
 }
