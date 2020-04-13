@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    @include('socialmedia.instagram')
                 </div>
 
                 <div class="links">
