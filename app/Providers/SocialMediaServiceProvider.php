@@ -29,8 +29,10 @@ class SocialMediaServiceProvider extends ServiceProvider
     public function boot()
     {
         if(Module::where('value', $this->name)->first()['active'] == 1) {
+            require __DIR__ . '../../helpers-socialmedia.php';
+
             View::composer(
-                'socialmedia.instagram', 'App\Http\View\Composers\SocialMedia\Instagram'
+                'modules.socialmedia.instagram', 'App\Http\View\Composers\SocialMedia\Instagram'
             );
         }
     }

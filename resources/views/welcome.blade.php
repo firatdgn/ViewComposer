@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    @include('socialmedia.instagram')
+                    {{getInstagramLink()}}
                 </div>
 
                 <div class="links">
