@@ -44,7 +44,7 @@
 	<!-- begin::Body -->
 	<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--static kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
 
-		@include('theme.layout')
+		@include('backend.theme.layout')
 
 		<!-- begin::Global Config(global config for global JS sciprts) -->
 		<script>

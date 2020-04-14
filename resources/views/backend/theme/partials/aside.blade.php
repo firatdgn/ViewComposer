@@ -7,9 +7,9 @@
 <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
 
 
-	@include('theme.partials.aside.brand')
+	@include('backend.theme.partials.aside.brand')
 
-	@include('theme.partials.aside.menu')
+	@include('backend.theme.partials.aside.menu')
 	
 </div>
 

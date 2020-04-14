@@ -6,6 +6,7 @@ use App\Module;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Route;
 
 class SocialMediaServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,11 @@ class SocialMediaServiceProvider extends ServiceProvider
             View::composer(
                 'modules.socialmedia.instagram', 'App\Http\View\Composers\SocialMedia\Instagram'
             );
+
+
+            Route::group([ 'prefix' => 'Backend/SocialMedia' ], function() {
+                Route::get('/' , 'App\Http\Controllers\Modules\SocialMedia\SocialMediaController@index');
+            });
         }
     }
 }
