@@ -2,21 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Module;
+use App\Modules;
 
-class BackendController extends Controller {
+class ModulesController extends Controller {
 	public function index()
 	{
-		$modules = Module::where('active', 1)->get();
+		$data['modules'] = Modules::all();
 
-		// bura veri tabanından alınacak şimdilik böyle kalsın
-		$data['modules'] = [
-			[
-				'name'	=> 'Sosyal Medya',
-				'url'	=> 'SocialMedia'
-			]
-		];
+		return view('backend.modules.index', $data);
+	}
 
-		return view('backend.dashboard', $data);
+	public function active($id)
+	{
+		Modules::find($id)->update([ 'is_active' => 1 ]);
+
+		return redirect('Backend/Modules');
+	}
+
+	public function deactive($id)
+	{
+		Modules::find($id)->update([ 'is_active' => 0 ]);
+
+		return redirect('Backend/Modules');
 	}
 }
