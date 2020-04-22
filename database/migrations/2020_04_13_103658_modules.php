@@ -15,8 +15,11 @@ class Modules extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string('value');
-            $table->integer('active');
+            $table->string('name');
+            $table->tinyInteger('is_loaded')->default(0);
+            $table->tinyInteger('is_dropped')->default(0);
+            $table->tinyInteger('is_needed_reflesh')->default(1);
+            $table->tinyInteger('is_active')->default(0);
             $table->timestamps();
         });
     }

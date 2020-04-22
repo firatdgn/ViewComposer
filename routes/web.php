@@ -20,4 +20,9 @@ Route::get('/', function () {
 
 Route::group([ 'prefix' => 'Backend' ], function() {
 	Route::get('/', 'BackendController@index');
+	Route::get('Modules', 'ModulesController@index');
+
+	Route::get('Module/{id}/Active', 'ModulesController@active');
+	Route::get('Module/{id}/Deactive', 'ModulesController@deactive');
+
 });

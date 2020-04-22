@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $menus = [];
+
+        foreach(Modules::where('is_active', 1)->get() as $e) {
+            $menus[$e['name']] = $e['manage_url'];
+        }
+
+        view()->share('menuModules', $menus);
     }
 }

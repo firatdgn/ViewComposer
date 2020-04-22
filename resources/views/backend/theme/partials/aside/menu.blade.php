@@ -8,10 +8,10 @@
 				<h4 class="kt-menu__section-text">Modüller</h4>
 				<i class="kt-menu__section-icon flaticon-more-v2"></i>
 			</li>
-			@foreach($modules as $module)
+			@foreach($menuModules as $name => $url)
 				<li class="kt-menu__item">
-					<a href="{{url('Backend/' . $module['url'])}}" class="kt-menu__link">
-						<span class="kt-menu__link-text">{{$module['name']}}</span>
+					<a href="{{url($url)}}" class="kt-menu__link">
+						<span class="kt-menu__link-text">{{$name}}</span>
 					</a>
 				</li>
 			@endforeach

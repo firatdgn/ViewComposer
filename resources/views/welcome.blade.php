@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{getInstagramLink()}}
+                    
                 </div>
 
                 <div class="links">
