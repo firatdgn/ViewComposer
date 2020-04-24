@@ -65,6 +65,11 @@ class SocialMediaServiceProvider extends ModuleServiceProvider
 
 			Route::get('Create', 'MediaController@create');
 			Route::post('Create', 'MediaController@store');
+
+			Route::get('{id}/Edit', 'MediaController@edit');
+			Route::post('{id}/Edit', 'MediaController@update');
+
+			Route::get('{id}/Delete', 'MediaController@delete');
 		});
 	}
 }

@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Schema;
 class SocialMediaServiceProvider extends ModuleServiceProvider
 {
 
-	var $name = 'Medya';
+	var $name = 'SosyalMedya';
 
-	var $manageUrl = 'Backend/Media';
+	var $manageUrl = 'Backend/SocialMedia';
 
 	/**
 	 * Register any application services.
@@ -39,32 +39,37 @@ class SocialMediaServiceProvider extends ModuleServiceProvider
 
 	protected function includeFiles()
 	{
-		require __DIR__ . '../../helpers/media.php';
+		require __DIR__ . '../../helpers/socialmedia.php';
 	}
 
 	protected function loadModule()
 	{
-		Schema::create('media', function($table) {
+		Schema::create('social_media', function($table) {
 			$table->increments('id');
 			$table->string('name', 128);
-			$table->string('description', 128)->nullable();
-			$table->string('link', 512);
+			$table->string('icon', 128);
+			$table->string('value', 128);
 			$table->timestamps();
 		});
 	}
 
 	protected function dropModule()
 	{
-		Schema::drop('media');
+		Schema::drop('social_media');
 	}
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/Media', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'MediaController@index');
+		Route::group([ 'prefix' => 'Backend/SocialMedia', 'namespace' => 'App\Http\Controllers\Modules\SocialMedia' ], function() {
+			Route::get('/' , 'SocialMediaController@index');
 
-			Route::get('Create', 'MediaController@create');
-			Route::post('Create', 'MediaController@store');
+			Route::get('Create', 'SocialMediaController@create');
+			Route::post('Create', 'SocialMediaController@store');
+
+			Route::get('{id}/Edit', 'SocialMediaController@edit');
+			Route::post('{id}/Edit', 'SocialMediaController@update');
+
+			Route::get('{id}/Delete', 'SocialMediaController@delete');
 		});
 	}
 }

@@ -63,7 +63,7 @@ class ModuleServiceProvider extends ServiceProvider
 
 			$this->includeFiles();
 
-			$this->loadRoutes();
+			if(method_exists(self, 'loadRoutes')) $this->loadRoutes();
 		} else {
 			if($moduleDetail['is_loaded'] == 1) {
 				$this->dropModule();

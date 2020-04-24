@@ -51,23 +51,11 @@ class SocialMediaServiceProvider extends ModuleServiceProvider
 			$table->string('value', 128);
 			$table->timestamps();
 		});
-
-		Modules::where('name', $this->name)->update([
-			'is_loaded' => 1,
-			'is_needed_reflesh' => 1,
-			'is_dropped' => 0
-		]);
 	}
 
 	protected function dropModule()
 	{
 		Schema::drop('social_media');
-
-		Modules::where('name', $this->name)->update([
-			'is_loaded' => 0,
-			'is_dropped' => 0,
-			'is_needed_reflesh' => 1
-		]);
 	}
 
 	protected function loadRoutes()
