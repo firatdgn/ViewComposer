@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Modules\SocialMedia;
+namespace App\Http\Controllers\Modules;
 
 use App\SocialMedia;
 
@@ -25,6 +25,31 @@ class SocialMediaController extends Controller
 			'icon' => request('icon'),
 			'value' => request('value')
 		]);
+
+		return redirect('Backend/SocialMedia');
+	}
+
+	public function edit($id)
+	{
+		$data['get'] = SocialMedia::find($id);
+
+		return view('backend.modules.socialmedia.edit', $data);
+	}
+
+	public function update($id)
+	{
+		SocialMedia::find($id)->update([
+			'name' => request('name'),
+			'icon' => request('icon'),
+			'value' => request('value')
+		]);
+
+		return redirect('Backend/SocialMedia');
+	}
+
+	public function delete($id)
+	{
+		SocialMedia::find($id)->delete();
 
 		return redirect('Backend/SocialMedia');
 	}

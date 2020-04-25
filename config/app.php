@@ -175,7 +175,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Providers\SocialMediaServiceProvider::class
+        App\Providers\AnalyticsServiceProvider::class,
+        App\Providers\BlogServiceProvider::class,
+        App\Providers\LanguageServiceProvider::class,
+        App\Providers\MediaServiceProvider::class,
+        App\Providers\SettingsServiceProvider::class,
+        App\Providers\ShoppingServiceProvider::class,
+        App\Providers\SocialMediaServiceProvider::class,
 
     ],
 

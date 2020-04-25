@@ -25,7 +25,7 @@ class ModuleServiceProvider extends ServiceProvider
 		if($check === null) {
 			Modules::create([
 				'name' => $this->name,
-				'manage_url' => 'Backend/SocialMedia',
+				'manage_url' => $this->manageUrl,
 				'is_active' => 0,
 				'is_loaded' => 0,
 				'is_needed_reflesh' => 0,
@@ -63,7 +63,7 @@ class ModuleServiceProvider extends ServiceProvider
 
 			$this->includeFiles();
 
-			if(method_exists(self, 'loadRoutes')) $this->loadRoutes();
+			if(method_exists($this, 'loadRoutes')) $this->loadRoutes();
 		} else {
 			if($moduleDetail['is_loaded'] == 1) {
 				$this->dropModule();

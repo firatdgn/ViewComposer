@@ -60,11 +60,16 @@ class SocialMediaServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/SocialMedia', 'namespace' => 'App\Http\Controllers\Modules\SocialMedia' ], function() {
+		Route::group([ 'prefix' => 'Backend/SocialMedia', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
 			Route::get('/' , 'SocialMediaController@index');
 
 			Route::get('Create', 'SocialMediaController@create');
 			Route::post('Create', 'SocialMediaController@store');
+
+			Route::get('{id}/Edit', 'SocialMediaController@edit');
+			Route::post('{id}/Edit', 'SocialMediaController@update');
+
+			Route::get('{id}/Delete', 'SocialMediaController@delete');
 		});
 	}
 }

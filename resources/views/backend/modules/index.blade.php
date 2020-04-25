@@ -37,7 +37,7 @@
                         @foreach($modules as $e)
                             <tr>
                                 <td>{!! $e['name'] !!}</td>
-                                <td>{!! $e['email'] !!}</td>
+                                <td><a href="{{ url('Backend/Module/'. $e['id'] . '/Active') }}"> aktif et</a></td>
                             </tr>
                         @endforeach
                     </tbody>
