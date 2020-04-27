@@ -21,9 +21,9 @@ class StaticsController extends Controller
 	public function store()
 	{
 		Statics::create([
-			'name' => request('name'),
-			'icon' => request('icon'),
-			'value' => request('value')
+			'key' => request('key'),
+			'value' => serialize(request('value')),
+			'is_html' => request('is_html')
 		]);
 
 		return redirect('Backend/Statics');

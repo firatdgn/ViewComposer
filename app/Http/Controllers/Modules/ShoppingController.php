@@ -101,7 +101,7 @@ class ShoppingController extends Controller
 	public function storeAttributeGroups()
 	{
 		AttributeGroups::create([
-			'code' => serialize(request('code')),
+			'code' => request('code'),
 			'name' => serialize(request('name'))
 		]);
 

@@ -25,3 +25,5 @@
     </tr>
 </table>
 {{Form::close()}}
+
+<a href="{{url('Backend')}}">Ana Sayfa</a> | <a href="{{url('Backend/Settings')}}">Geri</a>

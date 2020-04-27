@@ -20,7 +20,7 @@
 
 	if(!function_exists('getTrans')) {
 		function getTrans($key) {
-			return \App\Translations::where('code', getActiveLanguage())->where('key', $key)->first()['text'];
+			return getOnlyActiveLanguageValue(\App\Translations::where('key', $key)->first()['text']);
 		}
 	}
 

@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
 
         $menus = [];
 
-        foreach(Modules::where('is_active', 1)->get() as $e) {
+        foreach(Modules::where('is_active', 1)->orderBy('name')->get() as $e) {
             $menus[$e['name']] = $e['manage_url'];
         }
 

@@ -49,7 +49,6 @@ class LanguageServiceProvider extends ModuleServiceProvider
 	{
 		Schema::create('translations', function($table) {
 			$table->increments('id');
-			$table->string('code', 256);
 			$table->string('key', 256);
 			$table->text('text');
 			$table->tinyInteger('html')->default(0);
@@ -67,7 +66,8 @@ class LanguageServiceProvider extends ModuleServiceProvider
 
 		Languages::create([
 			'code' => 'tr',
-			'name' => 'Türkçe'
+			'name' => 'Türkçe',
+			'priority' => 1
 		]);
 	}
 

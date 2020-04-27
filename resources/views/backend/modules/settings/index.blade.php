@@ -12,7 +12,7 @@
     <tbody>
         @foreach($all as $e)
             <tr>
-                <td>{{$e['type']}}</td>
+                <td>@if($e['type'] == 1) Local @else Global @endif </td>
                 <td>{{$e['key']}}</td>
                 <td>{{$e['title']}}</td>
                 <td>{{$e['description']}}</td>
@@ -25,3 +25,5 @@
         @endforeach
     </tbody>
 </table>
+
+<a href="{{url('Backend')}}">Ana Sayfa</a>

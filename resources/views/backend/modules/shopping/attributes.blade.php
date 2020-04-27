@@ -9,7 +9,7 @@
     <tbody>
         @foreach($all as $e)
             <tr>
-                <td>{{getOnlyActiveLanguageValue($e['code'])}}</td>
+                <td>{{$e['code']}}</td>
                 <td>{{getOnlyActiveLanguageValue($e['name'])}}</td>
                 <td>{{$e['value']}}</td>
                 <td>

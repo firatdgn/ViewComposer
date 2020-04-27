@@ -18,3 +18,5 @@
         @endforeach
     </tbody>
 </table>
+
+<a href="{{url('Backend')}}">Geri</a>

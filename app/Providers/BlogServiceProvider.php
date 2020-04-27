@@ -78,6 +78,11 @@ class BlogServiceProvider extends ModuleServiceProvider
 
 			Route::get('Create', 'BlogController@create');
 			Route::post('Create', 'BlogController@store');
+
+			Route::get('{id}/Edit', 'BlogController@edit');
+			Route::post('{id}/Edit', 'BlogController@update');
+
+			Route::get('{id}/Delete', 'BlogController@delete');
 		});
 	}
 }

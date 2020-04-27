@@ -21,3 +21,5 @@
         @endforeach
     </tbody>
 </table>
+
+<a href="{{url('Backend')}}">Ana Sayfa</a> | <a href="{{url('Backend/Blog/Create')}}">Yeni</a>

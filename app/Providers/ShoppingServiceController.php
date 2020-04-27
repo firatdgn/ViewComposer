@@ -47,8 +47,6 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 		Schema::create('shopping_categories', function($table) {
 			$table->increments('id');
 			$table->string('name', 256);
-			$table->string('short_description', 1024)->nullable();
-			$table->text('description')->nullable();
 			$table->string('seo_description', 256)->nullable();
 			$table->string('seo_keywords', 256)->nullable();
 			$table->tinyInteger('is_active')->default(1);
@@ -56,41 +54,74 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 			$table->timestamps();
 		});
 
-		Schema::create('shopping_products', function($table) {
+		Schema::create('shopping_category_product', function($table) {
+			$table->increments('id');
+			$table->integer('category_id');
+			$table->integer('product_id');
+			$table->timestamps();
+		});
+
+		Schema::create('orders', function($table) {
+			$table->increments('id');
+			$table->tinyInteger('shipping_option');
+			$table->tinyInteger('payment_option');
+			$table->integer('order_status_id');
+			$table->integer('user_id');
+			$table->integer('shipping_address_id');
+			$table->integer('billing_address_id');
+			$table->timestamps();
+		});
+
+		Schema::create('order_products', function($table) {
+			$table->increments('id');
+			$table->integer('product_id');
+			$table->integer('order_id');
+			$table->double('qty', 20, 6);
+			$table->double('price', 20, 6);
+			$table->timestamps();
+		});
+
+		Schema::create('order_status', function($table) {
 			$table->increments('id');
 			$table->string('name', 1024);
-			$table->string('short_description', 1024)->nullable();
-			$table->text('description')->nullable();
-			$table->string('seo_description', 256)->nullable();
-			$table->string('seo_keywords', 256)->nullable();
-			$table->tinyInteger('is_active')->default(1);
-			$table->string('image', 1024)->nullable();
-			$table->string('price', 2048)->nullable();
+			$table->tinyInteger('default')->default(0);
 			$table->timestamps();
 		});
 
-		Schema::create('shopping_products_images', function($table) {
+		Schema::create('order_product_attributes', function($table) {
 			$table->increments('id');
-			$table->integer('product_id');
-			$table->string('image', 1024);
-			$table->integer('sort')->default(0);
+			$table->integer('order_product_id');
+			$table->integer('attribute_id');
+			$table->integer('attribute_value_id');
 			$table->timestamps();
 		});
 
-		Schema::create('products_to_categories', function($table) {
-			$table->integer('product_id');
-			$table->integer('category_id');
-		});
-
-		Schema::create('shopping_products_attributes', function($table) {
+		Schema::create('users', function($table) {
 			$table->increments('id');
-			$table->integer('product_id');
-			$table->integer('group_id');
-			$table->integer('value_id');
+			$table->string('name', 128);
+			$table->string('email', 128);
+			$table->string('password', 512);
 			$table->timestamps();
 		});
 
-		Schema::create('attribute_groups', function($table) {
+		Schema::create('address', function($table) {
+			$table->increments('id');
+			$table->integer('user_id');
+			$table->tinyInteger('type');
+			$table->string('first_name', 32);
+			$table->string('last_name', 32);
+			$table->string('company_name', 32);
+			$table->string('address1', 128);
+			$table->string('address2', 128);
+			$table->string('postcode', 32);
+			$table->string('city', 32);
+			$table->string('state', 32);
+			$table->string('country', 32);
+			$table->string('phone', 32);
+			$table->timestamps();
+		});
+
+		Schema::create('attributes', function($table) {
 			$table->increments('id');
 			$table->string('code', 32);
 			$table->string('name', 128);
@@ -104,11 +135,49 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 			$table->timestamps();
 		});
 
-		Schema::create('currencies', function($table) {
+		Schema::create('products', function($table) {
 			$table->increments('id');
+			$table->tinyInteger('type');
+			$table->string('name', 1024);
+			$table->string('slug', 1024);
+			$table->text('description')->nullable();
+			$table->string('seo_description', 256)->nullable();
+			$table->string('seo_keywords', 256)->nullable();
 			$table->tinyInteger('is_active')->default(1);
-			$table->string('code', 16);
-			$table->string('name', 64);
+			$table->double('price', 20, 6)->nullable();
+			$table->integer('main_product_id')->nullable();
+			$table->timestamps();
+		});
+
+		Schema::create('attribute_product', function($table) {
+			$table->increments('id');
+			$table->integer('attribute_id');
+			$table->integer('product_id');
+			$table->timestamps();
+		});
+
+		Schema::create('attribute_product_values', function($table) {
+			$table->increments('id');
+			$table->integer('attribute_id');
+			$table->integer('product_id');
+			$table->integer('variation_id');
+			$table->integer('attribute_value_id');
+			$table->timestamps();
+		});
+
+		Schema::create('products_images', function($table) {
+			$table->increments('id');
+			$table->integer('product_id');
+			$table->string('image', 1024);
+			$table->integer('sort')->default(0);
+			$table->timestamps();
+		});
+
+
+		Schema::create('wishlist', function($table) {
+			$table->increments('id');
+			$table->integer('user_id');
+			$table->integer('product_id');
 			$table->timestamps();
 		});
 	}
@@ -116,13 +185,20 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 	protected function dropModule()
 	{
 		Schema::drop('shopping_categories');
-		Schema::drop('shopping_products');
-		Schema::drop('shopping_products_images');
-		Schema::drop('products_to_categories');
-		Schema::drop('shopping_products_attributes');
-		Schema::drop('attribute_groups');
+		Schema::drop('shopping_category_product');
+		Schema::drop('orders');
+		Schema::drop('order_products');
+		Schema::drop('order_status');
+		Schema::drop('order_product_attributes');
+		Schema::drop('users');
+		Schema::drop('address');
+		Schema::drop('attributes');
 		Schema::drop('attribute_values');
-		Schema::drop('currencies');
+		Schema::drop('products');
+		Schema::drop('attribute_product');
+		Schema::drop('attribute_product_values');
+		Schema::drop('products_images');
+		Schema::drop('wishlist');
 	}
 
 	protected function loadRoutes()

@@ -1,16 +1,18 @@
-{{Form::open(['Backend/SocialMedia/Create', 'method' => 'POST'])}}
+{{Form::open(['Backend/Statics/Create', 'method' => 'POST'])}}
 <table>
     <tr>
-        <th>Sosyal Medya Adı</th>
-        <td>{{Form::text('name')}}</td>
+        <th>Anahtar</th>
+        <td>{{Form::text('key')}}</td>
     </tr>
+    @foreach(getAllLanguages() as $code => $name)
     <tr>
-        <th>İkonu</th>
-        <td>{{Form::text('icon')}}</td>
+        <th>{{$name}} Kategori ismi</th>
+        <td>{{Form::text('value[' . $code . ']')}}</td>
     </tr>
+    @endforeach
     <tr>
         <th>Değeri</th>
-        <td>{{Form::text('value')}}</td>
+        <td>{{Form::select('is_html', [ '1' => 'Değil', '2' => 'HTML' ])}}</td>
     </tr>
     <tr>
         <th colspan="2">{{Form::submit('Gönder')}}</th>

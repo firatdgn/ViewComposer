@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\Modules;
 
-use App\SocialMedia;
+use App\Translations;
 
 class TranslationsController extends Controller
 {
 	public function index()
 	{
-		$data['all'] = SocialMedia::all();
+		$data['all'] = Translations::all();
 
-		return view('backend.modules.socialmedia.index', $data);
+		return view('backend.modules.languages.index', $data);
 	}
 
 	public function create()
 	{
-		return view('backend.modules.socialmedia.create', $data);
+		return view('backend.modules.languages.create', $data);
 	}
 
 	public function store()
 	{
-		SocialMedia::create([
+		Translations::create([
 			'name' => request('name'),
 			'icon' => request('icon'),
 			'value' => request('value')

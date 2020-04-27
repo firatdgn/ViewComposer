@@ -16,7 +16,7 @@ class BlogController extends Controller
 
 	public function create()
 	{
-		return view('backend.modules.blog.create', $data);
+		return view('backend.modules.blog.create');
 	}
 
 	public function store()
