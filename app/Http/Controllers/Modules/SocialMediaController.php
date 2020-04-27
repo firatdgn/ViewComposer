@@ -15,7 +15,7 @@ class SocialMediaController extends Controller
 
 	public function create()
 	{
-		return view('backend.modules.socialmedia.create', $data);
+		return view('backend.modules.socialmedia.create');
 	}
 
 	public function store()

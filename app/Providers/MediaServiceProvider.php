@@ -60,7 +60,7 @@ class MediaServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/Media', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
 			Route::get('/' , 'MediaController@index');
 
 			Route::get('Create', 'MediaController@create');

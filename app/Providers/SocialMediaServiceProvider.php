@@ -60,7 +60,7 @@ class SocialMediaServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/SocialMedia', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
 			Route::get('/' , 'SocialMediaController@index');
 
 			Route::get('Create', 'SocialMediaController@create');

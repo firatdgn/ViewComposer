@@ -50,6 +50,7 @@ class LanguageServiceProvider extends ModuleServiceProvider
 		Schema::create('translations', function($table) {
 			$table->increments('id');
 			$table->string('code', 256);
+			$table->string('key', 256);
 			$table->text('text');
 			$table->tinyInteger('html')->default(0);
 			$table->timestamps();
@@ -78,7 +79,7 @@ class LanguageServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/Language', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
 			Route::get('/' , 'TranslationsController@index');
 
 			Route::get('Create', 'TranslationsController@create');

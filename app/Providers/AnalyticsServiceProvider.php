@@ -75,9 +75,11 @@ class AnalyticsServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/Analytics', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
 			Route::get('/' , 'AnalyticsController@index');
-			Route::post('Edit', 'AnalyticsController@update');
+
+			Route::get('{id}/Edit', 'AnalyticsController@edit');
+			Route::post('{id}/Edit', 'AnalyticsController@update');
 		});
 	}
 }

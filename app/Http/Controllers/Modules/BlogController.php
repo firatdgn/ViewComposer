@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Modules;
 
-use App\SocialMedia;
+use App\Blog;
+use App\BlogCategories;
 
 class BlogController extends Controller
 {
 	public function index()
 	{
-		$data['all'] = SocialMedia::all();
+		$data['all'] = Blog::all();
 
-		return view('backend.modules.socialmedia.index', $data);
+		return view('backend.modules.blog.index', $data);
 	}
 
 	public function create()
 	{
-		return view('backend.modules.socialmedia.create', $data);
+		return view('backend.modules.blog.create', $data);
 	}
 
 	public function store()

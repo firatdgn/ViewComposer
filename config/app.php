@@ -179,9 +179,11 @@ return [
         App\Providers\BlogServiceProvider::class,
         App\Providers\LanguageServiceProvider::class,
         App\Providers\MediaServiceProvider::class,
+        App\Providers\MenusServiceProvider::class,
         App\Providers\SettingsServiceProvider::class,
         App\Providers\ShoppingServiceProvider::class,
         App\Providers\SocialMediaServiceProvider::class,
+        App\Providers\StaticsServiceProvider::class,
 
     ],
 

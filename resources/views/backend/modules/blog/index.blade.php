@@ -10,8 +10,8 @@
     <tbody>
         @foreach($all as $e)
             <tr>
-                <td>{{$e['name']}}</td>
-                <td>{{$e['icon']}}</td>
+                <td>{{$e['title']}}</td>
+                <td>{{$e['slug']}}</td>
                 <td>{{$e['value']}}</td>
                 <td>
                     <a href="{{url('Backend/SocialMedia/' . $e['id'] . '/Edit')}}">Düzenle</a>

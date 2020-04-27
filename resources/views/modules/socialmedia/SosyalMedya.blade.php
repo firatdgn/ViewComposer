@@ -1,1 +1,0 @@
-This is SosyalMedya.blade.php

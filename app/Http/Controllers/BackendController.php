@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Modules;
 
-class ModulesController extends Controller {
+class BackendController extends Controller {
 	public function index()
 	{
 		$data['modules'] = Modules::all();
@@ -16,13 +16,13 @@ class ModulesController extends Controller {
 	{
 		Modules::find($id)->update([ 'is_active' => 1 ]);
 
-		return redirect('Backend/Modules');
+		return redirect('Backend');
 	}
 
 	public function deactive($id)
 	{
 		Modules::find($id)->update([ 'is_active' => 0 ]);
 
-		return redirect('Backend/Modules');
+		return redirect('Backend');
 	}
 }

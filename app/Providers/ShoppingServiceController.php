@@ -46,41 +46,26 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 	{
 		Schema::create('shopping_categories', function($table) {
 			$table->increments('id');
-			$table->tinyInteger('is_active')->default(1);
-			$table->string('image', 128);
-			$table->text('detail');
-			$table->timestamps();
-		});
-
-		Schema::create('shopping_categories_info', function($table) {
-			$table->increments('id');
-			$table->integer('category_id');
-			$table->string('language_code', 4);
 			$table->string('name', 256);
 			$table->string('short_description', 1024)->nullable();
 			$table->text('description')->nullable();
 			$table->string('seo_description', 256)->nullable();
 			$table->string('seo_keywords', 256)->nullable();
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('image', 128)->nullable();
 			$table->timestamps();
 		});
 
 		Schema::create('shopping_products', function($table) {
 			$table->increments('id');
-			$table->tinyInteger('is_active')->default(1);
-			$table->string('image', 1024)->nullable();
-			$table->string('price', 2048)->nullable();
-			$table->timestamps();
-		});
-
-		Schema::create('shopping_products_info', function($table) {
-			$table->increments('id');
-			$table->integer('product_id');
-			$table->string('language_code', 4);
 			$table->string('name', 1024);
 			$table->string('short_description', 1024)->nullable();
 			$table->text('description')->nullable();
 			$table->string('seo_description', 256)->nullable();
 			$table->string('seo_keywords', 256)->nullable();
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('image', 1024)->nullable();
+			$table->string('price', 2048)->nullable();
 			$table->timestamps();
 		});
 
@@ -108,13 +93,6 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 		Schema::create('attribute_groups', function($table) {
 			$table->increments('id');
 			$table->string('code', 32);
-			$table->timestamps();
-		});
-
-		Schema::create('attribute_groups_info', function($table) {
-			$table->increments('id');
-			$table->integer('group_id');
-			$table->string('language_code', 4);
 			$table->string('name', 128);
 			$table->timestamps();
 		});
@@ -122,13 +100,6 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 		Schema::create('attribute_values', function($table) {
 			$table->increments('id');
 			$table->integer('group_id');
-			$table->timestamps();
-		});
-
-		Schema::create('attribute_values_info', function($table) {
-			$table->increments('id');
-			$table->integer('value_id');
-			$table->string('language_code', 4);
 			$table->string('name', 128);
 			$table->timestamps();
 		});
@@ -145,31 +116,60 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 	protected function dropModule()
 	{
 		Schema::drop('shopping_categories');
-		Schema::drop('shopping_categories_info');
 		Schema::drop('shopping_products');
-		Schema::drop('shopping_products_info');
 		Schema::drop('shopping_products_images');
 		Schema::drop('products_to_categories');
 		Schema::drop('shopping_products_attributes');
 		Schema::drop('attribute_groups');
-		Schema::drop('attribute_groups_info');
 		Schema::drop('attribute_values');
-		Schema::drop('attribute_values_info');
 		Schema::drop('currencies');
 	}
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/Settings', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'SettingsController@index');
+		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+			Route::get('AttributeGroups', 'ShoppingController@attributeGroups');
 
-			Route::get('Create', 'SettingsController@create');
-			Route::post('Create', 'SettingsController@store');
+			Route::get('AttributeGroup/Create', 'ShoppingController@newAttributeGroups');
+			Route::post('AttributeGroup/Create', 'ShoppingController@storeAttributeGroups');
 
-			Route::get('{id}/Edit', 'SettingsController@edit');
-			Route::post('{id}/Edit', 'SettingsController@update');
+			Route::get('AttributeGroup/{id}/Edit', 'ShoppingController@editAttributeGroups');
+			Route::post('AttributeGroup/{id}/Edit', 'ShoppingController@updateAttributeGroups');
 
-			Route::get('{id}/Delete', 'SettingsController@delete');
+			Route::get('AttributeGroup/{id}/Delete', 'ShoppingController@deleteAttributeGroup');
+
+			Route::get('AttributeGroup/Values', 'ShoppingController@values');
+
+			Route::get('AttributeGroup/{id}/ValueAdd', 'ShoppingController@newValueForAttributeGroup');
+			Route::post('AttributeGroup/{id}/ValueAdd', 'ShoppingController@storeValueForAttributeGroup');
+
+			Route::get('AttributeGroup/Value/{id}/Edit', 'ShoppingController@editAttributeGroupValue');
+			Route::post('AttributeGroup/Value/{id}/Edit', 'ShoppingController@updateAttributeGroupValue');
+
+			Route::get('AttributeGroup/Value/{id}/Delete', 'ShoppingController@deleteAttributeGroupValue');
+
+			Route::get('Categories', 'ShoppingController@categories');
+
+			Route::get('Category/Create', 'ShoppingController@newCategory');
+			Route::post('Category/Create', 'ShoppingController@storeCategory');
+
+			Route::get('Category/{id}/Edit', 'ShoppingController@editCategory');
+			Route::post('Category/{id}/Edit', 'ShoppingController@updateCategory');
+
+			Route::get('Category/{id}/Delete', 'ShoppingController@deleteCategory');
+
+			Route::get('Products', 'ShoppingController@products');
+
+			Route::get('Product/Create', 'ShoppingController@newProduct');
+			Route::post('Product/Create', 'ShoppingController@storeProduct');
+
+			Route::get('Product/{id}/Edit', 'ShoppingController@editProduct');
+			Route::post('Product/{id}/Edit', 'ShoppingController@updateProduct');
+
+			Route::get('Product/{id}/Delete', 'ShoppingController@deleteProduct');
+
+			Route::get('Product/{id}/DefineAnAttribute', 'ShoppingController@defineAnAttribute');
+			Route::post('Product/{id}/DefineAnAttribute', 'ShoppingController@storeDefineAnAttribute');
 		});
 	}
 }

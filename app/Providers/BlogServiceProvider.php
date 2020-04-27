@@ -53,11 +53,11 @@ class BlogServiceProvider extends ModuleServiceProvider
 			$table->timestamps();
 		});
 
-		Schame::create('blog', function($table) {
+		Schema::create('blog', function($table) {
 			$table->increments('id');
 			$table->string('title', 1024);
 			$table->string('slug', 1024);
-			$table->integer('category_id');
+			$table->string('category_id', 512);
 			$table->text('content');
 			$table->string('seo_description', 1024)->nullable();
 			$table->string('seo_keywords', 1024)->nullable();
@@ -73,7 +73,7 @@ class BlogServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => 'Backend/Blog', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
 			Route::get('/' , 'BlogController@index');
 
 			Route::get('Create', 'BlogController@create');

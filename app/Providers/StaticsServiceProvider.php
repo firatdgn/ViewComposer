@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Modules;
+use App\Statics;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SettingsServiceProvider extends ModuleServiceProvider
+class StaticsServiceProvider extends ModuleServiceProvider
 {
 
-	var $name = 'Ayarlar';
+	var $name = 'Sabitler';
 
-	var $manageUrl = 'Backend/Settings';
+	var $manageUrl = 'Backend/Statics';
 
 	/**
 	 * Register any application services.
@@ -39,39 +39,37 @@ class SettingsServiceProvider extends ModuleServiceProvider
 
 	protected function includeFiles()
 	{
-		require __DIR__ . '../../helpers/settings.php';
+		require __DIR__ . '../../helpers/statics.php';
 	}
 
 	protected function loadModule()
 	{
-		Schema::create('settings', function($table) {
+		Schema::create('statics', function($table) {
 			$table->increments('id');
-			$table->tinyInteger('type')->default(0);
-			$table->string('key', 128);
-			$table->string('title', 256);
-			$table->string('description', 1024)->nullable();
-			$table->text('value');
+			$table->string('key', 1024);
+			$table->text('value')->nullable();
+			$table->tinyInteger('is_html')->default(0);
 			$table->timestamps();
 		});
 	}
 
 	protected function dropModule()
 	{
-		Schema::drop('settings');
+		Schema::drop('statics');
 	}
 
 	protected function loadRoutes()
 	{
 		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'SettingsController@index');
+			Route::get('/' , 'StaticsController@index');
 
-			Route::get('Create', 'SettingsController@create');
-			Route::post('Create', 'SettingsController@store');
+			Route::get('Create', 'StaticsController@create');
+			Route::post('Create', 'StaticsController@store');
 
-			Route::get('{id}/Edit', 'SettingsController@edit');
-			Route::post('{id}/Edit', 'SettingsController@update');
+			Route::get('{id}/Edit', 'StaticsController@edit');
+			Route::post('{id}/Edit', 'StaticsController@update');
 
-			Route::get('{id}/Delete', 'SettingsController@delete');
+			Route::get('{id}/Delete', 'StaticsController@delete');
 		});
 	}
 }

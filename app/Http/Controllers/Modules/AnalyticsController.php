@@ -10,12 +10,23 @@ class AnalyticsController extends Controller
 	{
 		$data['all'] = Analytics::all();
 
-		return view('backend.modules.socialmedia.index', $data);
+		return view('backend.modules.analytics.index', $data);
 	}
 
-	public function update()
+	public function edit($id)
 	{
-		//Analytics::where('key')
+		$data['get'] = Analytics::find($id);
+
+		return view('backend.modules.analytics.edit', $data);
+	}
+
+	public function update($id)
+	{
+		Analytics::find($id)->update([
+			'value' => request('value')
+		]);
+
+		return redirect('Backend/Analytics');
 	}
 
 }
