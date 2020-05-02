@@ -11,12 +11,12 @@ class LanguagesController extends Controller
 	{
 		$data['all'] = Languages::all();
 
-		return view('backend.modules.socialmedia.index', $data);
+		return view('backend.modules.languages.index', $data);
 	}
 
 	public function create()
 	{
-		return view('backend.modules.socialmedia.create', $data);
+		return view('backend.modules.languages.create');
 	}
 
 	public function store()
@@ -27,6 +27,23 @@ class LanguagesController extends Controller
 			'value' => request('value')
 		]);
 
-		return redirect('Backend/SocialMedia');
+		return redirect()->route('languages');
+	}
+
+	public function edit($id)
+	{
+		$data['get'] = Languages::find($id);
+
+		return view('backend.modules.languages.edit', $data);
+	}
+
+	public function update($id)
+	{
+
+	}
+
+	public function delete($id)
+	{
+		//eğer son dilse silinemez
 	}
 }

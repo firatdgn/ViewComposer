@@ -14,8 +14,8 @@
         <thead>
             <tr>
                 <th>Adı</th>
-                <th>İkon</th>
-                <th>Değeri</th>
+                <th>Kodu</th>
+                <th>Aktif mi?</th>
                 <th>İşlem</th>
             </tr>
         </thead>
@@ -23,11 +23,11 @@
             @foreach($all as $e)
                 <tr>
                     <td>{{$e['name']}}</td>
-                    <td>{{$e['icon']}}</td>
-                    <td>{{$e['value']}}</td>
+                    <td>{{$e['code']}}</td>
+                    <td>{{$e['is_active']}}</td>
                     <td>
-                        <a href="{{route('socialmedia.edit', $e['id'])}}">Düzenle</a>
-                        <a href="{{route('socialmedia.delete', $e['id'])}}">Sil</a>
+                        <a href="{{route('language.edit', $e['id'])}}">Düzenle</a>
+                        <a href="{{route('language.delete', $e['id'])}}">Sil</a>
                     </td>
                 </tr>
             @endforeach

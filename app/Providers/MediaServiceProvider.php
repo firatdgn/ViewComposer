@@ -17,6 +17,10 @@ class MediaServiceProvider extends ModuleServiceProvider
 
 	var $manageUrl = 'Backend/Media';
 
+	var $description = 'Sitenizde dosya paylaşımınınız olsun, resim, video yükleme olsun. Bu işlemleri yapmaya yarar.';
+
+	var $version = '1.0.0';
+
 	/**
 	 * Register any application services.
 	 *
@@ -61,15 +65,15 @@ class MediaServiceProvider extends ModuleServiceProvider
 	protected function loadRoutes()
 	{
 		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'MediaController@index');
+			Route::get('/' , 'MediaController@index')->name('media');
 
-			Route::get('Create', 'MediaController@create');
+			Route::get('Create', 'MediaController@create')->name('media.create');
 			Route::post('Create', 'MediaController@store');
 
-			Route::get('{id}/Edit', 'MediaController@edit');
+			Route::get('{id}/Edit', 'MediaController@edit')->name('media.edit');
 			Route::post('{id}/Edit', 'MediaController@update');
 
-			Route::get('{id}/Delete', 'MediaController@delete');
+			Route::get('{id}/Delete', 'MediaController@delete')->name('media.delete');
 		});
 	}
 }

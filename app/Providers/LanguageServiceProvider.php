@@ -20,6 +20,10 @@ class LanguageServiceProvider extends ModuleServiceProvider
 
 	var $manageUrl = 'Backend/Language';
 
+	var $description = 'Sistemin çoklu dil yapısına uygun olmasını sağlar.';
+
+	var $version = '1.0.0';
+
 	/**
 	 * Register any application services.
 	 *
@@ -79,16 +83,28 @@ class LanguageServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'TranslationsController@index');
+		Route::get('Backend/Translations' , 'App\Http\Controllers\Modules\TranslationsController@index')->name('translations');
 
-			Route::get('Create', 'TranslationsController@create');
+		Route::group([ 'prefix' => 'Backend/Translation', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+			Route::get('Create', 'TranslationsController@create')->name('translation.create');
 			Route::post('Create', 'TranslationsController@store');
 
-			Route::get('{id}/Edit', 'TranslationsController@edit');
+			Route::get('{id}/Edit', 'TranslationsController@edit')->name('trasnlation.edit');
 			Route::post('{id}/Edit', 'TranslationsController@update');
 
-			Route::get('{id}/Delete', 'TranslationsController@delete');
+			Route::get('{id}/Delete', 'TranslationsController@delete')->name('trasnlation.delete');
+		});
+
+		Route::get('Backend/Languages' , 'App\Http\Controllers\Modules\LanguagesController@index')->name('languages');
+
+		Route::group([ 'prefix' => 'Backend/Language', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+			Route::get('Create', 'LanguagesController@create')->name('language.create');
+			Route::post('Create', 'LanguagesController@store');
+
+			Route::get('{id}/Edit', 'LanguagesController@edit')->name('language.edit');
+			Route::post('{id}/Edit', 'LanguagesController@update');
+
+			Route::get('{id}/Delete', 'LanguagesController@delete')->name('language.delete');
 		});
 	}
 }

@@ -17,6 +17,10 @@ class SettingsServiceProvider extends ModuleServiceProvider
 
 	var $manageUrl = 'Backend/Settings';
 
+	var $description = 'Sisteminde ayarları saklar ve derler.';
+
+	var $version = '1.0.0';
+
 	/**
 	 * Register any application services.
 	 *
@@ -62,16 +66,11 @@ class SettingsServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'SettingsController@index');
+		Route::get('Backend/Settings' , 'SettingsController@index')->name('settings');
 
-			Route::get('Create', 'SettingsController@create');
-			Route::post('Create', 'SettingsController@store');
-
-			Route::get('{id}/Edit', 'SettingsController@edit');
+		Route::group([ 'prefix' => 'Backend/Setting', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+			Route::get('{id}/Edit', 'SettingsController@edit')->name('setting.edit');
 			Route::post('{id}/Edit', 'SettingsController@update');
-
-			Route::get('{id}/Delete', 'SettingsController@delete');
 		});
 	}
 }

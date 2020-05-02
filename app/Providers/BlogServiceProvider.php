@@ -12,10 +12,13 @@ use Illuminate\Support\Facades\Schema;
 
 class BlogServiceProvider extends ModuleServiceProvider
 {
-
 	var $name = 'Blog';
 
 	var $manageUrl = 'Backend/Blog';
+
+	var $description = 'Sitesinde basit mantalitede blog sayfası oluşturmak paylaşmak isteyenler oluşturulmuştur.';
+
+	var $version = '1.0.0';
 
 	/**
 	 * Register any application services.
@@ -74,15 +77,25 @@ class BlogServiceProvider extends ModuleServiceProvider
 	protected function loadRoutes()
 	{
 		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'BlogController@index');
+			Route::get('/' , 'BlogController@index')->name('blog');
 
-			Route::get('Create', 'BlogController@create');
+			Route::get('Create', 'BlogController@create')->name('blog.create');
 			Route::post('Create', 'BlogController@store');
 
-			Route::get('{id}/Edit', 'BlogController@edit');
+			Route::get('{id}/Edit', 'BlogController@edit')->name('blog.edit');
 			Route::post('{id}/Edit', 'BlogController@update');
 
-			Route::get('{id}/Delete', 'BlogController@delete');
+			Route::get('{id}/Delete', 'BlogController@delete')->name('blog.delete');
+
+			Route::get('BlogCategories', 'BlogCategoriesController@index')->name('blog.categories');
+
+			Route::get('BlogCategory/Create', 'BlogCategoriesController@create')->name('blog.category.create');
+			Route::post('BlogCategory/Create',  'BlogCategoriesController@store');
+
+			Route::get('BlogCategory/{id}/Edit', 'BlogCategoriesController@edit')->name('blog.category.edit');
+			Route::post('BlogCategory/{id}/Edit', 'BlogCategoriesController@update');
+
+			Route::get('BlogCategory/{id}/Delete', 'BlogCategoriesController@delete')->name('blog.category.delete');
 		});
 	}
 }

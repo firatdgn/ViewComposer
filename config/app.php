@@ -184,6 +184,7 @@ return [
         App\Providers\ShoppingServiceProvider::class,
         App\Providers\SocialMediaServiceProvider::class,
         App\Providers\StaticsServiceProvider::class,
+        App\Providers\SystemServiceProvider::class,
 
     ],
 

@@ -17,6 +17,10 @@ class StaticsServiceProvider extends ModuleServiceProvider
 
 	var $manageUrl = 'Backend/Statics';
 
+	var $description = 'Google ve Yandexte analiz hesap için gerekli olan alanları oluşturur ve taşır.';
+
+	var $version = '1.0.0';
+
 	/**
 	 * Register any application services.
 	 *
@@ -46,6 +50,7 @@ class StaticsServiceProvider extends ModuleServiceProvider
 	{
 		Schema::create('statics', function($table) {
 			$table->increments('id');
+			$table->string('name', 1024)->nullable();
 			$table->string('key', 1024);
 			$table->text('value')->nullable();
 			$table->tinyInteger('is_html')->default(0);
@@ -60,16 +65,16 @@ class StaticsServiceProvider extends ModuleServiceProvider
 
 	protected function loadRoutes()
 	{
-		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'StaticsController@index');
+		Route::get('Backend/Statics' , 'App\Http\Controllers\Modules\StaticsController@index')->name('statics');
 
-			Route::get('Create', 'StaticsController@create');
+		Route::group([ 'prefix' => 'Backend/Static', 'namespace' => 'App\Http\Controllers\Modules' ], function() {
+			Route::get('Create', 'StaticsController@create')->name('static.create');
 			Route::post('Create', 'StaticsController@store');
 
-			Route::get('{id}/Edit', 'StaticsController@edit');
+			Route::get('{id}/Edit', 'StaticsController@edit')->name('static.edit');
 			Route::post('{id}/Edit', 'StaticsController@update');
 
-			Route::get('{id}/Delete', 'StaticsController@delete');
+			Route::get('{id}/Delete', 'StaticsController@delete')->name('static.delete');
 		});
 	}
 }

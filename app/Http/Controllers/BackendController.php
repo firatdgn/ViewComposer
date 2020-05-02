@@ -12,17 +12,5 @@ class BackendController extends Controller {
 		return view('backend.modules.index', $data);
 	}
 
-	public function active($id)
-	{
-		Modules::find($id)->update([ 'is_active' => 1 ]);
 
-		return redirect('Backend');
-	}
-
-	public function deactive($id)
-	{
-		Modules::find($id)->update([ 'is_active' => 0 ]);
-
-		return redirect('Backend');
-	}
 }

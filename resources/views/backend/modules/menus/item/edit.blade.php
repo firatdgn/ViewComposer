@@ -4,7 +4,7 @@
 @section('indexPageTitle', 'Sosyal Medya Hesabını Düzenle')
 
 @section('content')
-    {!! Form::open([ 'route' => [ 'menu.edit', $get['id'] ], 'class' => 'kt-form kt-form--label-right']) !!}
+    {!! Form::open([ 'route' => [ 'menu.item.edit', $get['id'] ], 'class' => 'kt-form kt-form--label-right']) !!}
         <div class="kt-portlet__body">
             @include('backend.theme.errors.form-validation')
             <div class="form-group row">
@@ -17,6 +17,30 @@
                 <label class="col-lg-3 col-form-label">Açıklaması:</label>
                 <div class="col-lg-9">
                     {{ Form::text('description', $get['description'], [ 'class' => 'form-control']) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label">Sıralaması:</label>
+                <div class="col-lg-9">
+                    {{ Form::text('sort', $get['sort'], [ 'class' => 'form-control']) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label">Adres:</label>
+                <div class="col-lg-9">
+                    {{ Form::text('url', $get['url'], [ 'class' => 'form-control']) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label">İkon:</label>
+                <div class="col-lg-9">
+                    {{ Form::text('icon', $get['icon'], [ 'class' => 'form-control']) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label">Açıklaması:</label>
+                <div class="col-lg-9">
+                    {{ Form::select('is_html', [ 1 => 'Değil', 2 => 'HTMl' ], $get['is_html'], [ 'class' => 'form-control']) }}
                 </div>
             </div>
         </div>

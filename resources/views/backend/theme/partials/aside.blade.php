@@ -1,4 +1,7 @@
-
+<!--
+	Name:Tema dosyası
+	Desc:Tema Dosyası
+-->
 <!-- begin:: Aside -->
 
 <!-- Uncomment this to display the close button of the panel

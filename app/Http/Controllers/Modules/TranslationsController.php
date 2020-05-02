@@ -28,4 +28,19 @@ class TranslationsController extends Controller
 
 		return redirect('Backend/SocialMedia');
 	}
+
+	public function edit($id)
+	{
+
+	}
+
+	public function update($id)
+	{
+
+	}
+
+	public function delete($id)
+	{
+		
+	}
 }

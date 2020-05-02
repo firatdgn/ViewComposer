@@ -1,22 +1,75 @@
-<table>
-    <thed>
-        <tr>
-            <th>Adı</th>
-            <th>Değeri</th>
-            <th>İşlem</th>
-        </tr>
-    </thed>
-    <tbody>
-        @foreach($all as $e)
-            <tr>
-                <td>{{$e['key']}}</td>
-                <td>{{$e['value']}}</td>
-                <td>
-                    <a href="{{url('Backend/Analytics/' . $e['id'] . '/Edit')}}">Düzenle</a>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+<!--
+    Name:Müşteriler
+    Desc:aciklama
 
-<a href="{{url('Backend')}}">Geri</a>
+-->
+@extends('backend.theme.main')
+
+@section('indexPage', true)
+@section('indexPageTitle', 'Analiz Hesapları')
+
+@section('content')
+<div class="kt-portlet__body">
+    <table class="table table-bordered table-hover" id="kt_table_1">
+        <thead>
+            <tr>
+                <th>Adı</th>
+                <th>Anahtarı</th>
+                <th>Değeri</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($all as $e)
+                <tr>
+                    <td>{{$e['name']}}</td>
+                    <td>{{$e['key']}}</td>
+                    <td>{{$e['value']}}</td>
+                    <td>
+                        <a href="{{route( 'analytic.edit', [ $e['id'] ])}}">Düzenle</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endsection
+
+@section('datatable', true)
+
+@section('pageJs')
+    <script type="text/javascript">
+        "use strict";
+        var KTDatatablesDataSourceHtml = function() {
+
+            var initTable1 = function() {
+                var table = $('#kt_table_1');
+
+                // begin first table
+                table.DataTable({
+                    language: {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
+                    },
+                    columnDefs: [
+                        { targets: [ -1 ], orderable: false}
+                    ]
+                });
+
+            };
+
+            return {
+                //main function to initiate the module
+                init: function() {
+                    initTable1();
+                },
+
+            };
+
+        }();
+
+        jQuery(document).ready(function() {
+            KTDatatablesDataSourceHtml.init();
+        });
+
+    </script>
+@endsection

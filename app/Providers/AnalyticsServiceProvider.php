@@ -12,10 +12,13 @@ use Illuminate\Support\Facades\Schema;
 
 class AnalyticsServiceProvider extends ModuleServiceProvider
 {
-
 	var $name = 'Analiz';
 
 	var $manageUrl = 'Backend/Analytics';
+
+	var $description = 'Sistemini takip etmeyen kullanıcılar için oluşturulmuştur. Şuan için sadece Google ve Yandex bulunmaktadır.';
+
+	var $version = '1.0.0';
 
 	/**
 	 * Register any application services.
@@ -47,24 +50,29 @@ class AnalyticsServiceProvider extends ModuleServiceProvider
 		Schema::create('analytics', function($table) {
 			$table->increments('id');
 			$table->string('key', 1024);
+			$table->string('name', 1024);
 			$table->text('value')->nullable();
 			$table->timestamps();
 		});
 
 		Analytics::create([
-			'key' => 'googleOnay'
+			'key' => 'googleOnay',
+			'name' => 'Google Onaylama Kodu META'
 		]);
 
 		Analytics::create([
-			'key' => 'googleAnalytic'
+			'key' => 'googleAnalytic',
+			'name' => 'Google Analytics Kodu JAVSCRIPT'
 		]);
 
 		Analytics::create([
-			'key' => 'yandexOnay'
+			'key' => 'yandexOnay',
+			'name' => 'Yandex Onaylama Kodu META'
 		]);
 
 		Analytics::create([
-			'key' => 'yandexAnalytic'
+			'key' => 'yandexAnalytic',
+			'name' => 'Yandex Takip Kodu JAVASCRIPT'
 		]);
 	}
 
@@ -76,9 +84,9 @@ class AnalyticsServiceProvider extends ModuleServiceProvider
 	protected function loadRoutes()
 	{
 		Route::group([ 'prefix' => $this->manageUrl, 'namespace' => 'App\Http\Controllers\Modules' ], function() {
-			Route::get('/' , 'AnalyticsController@index');
+			Route::get('/' , 'AnalyticsController@index')->name('analytics');
 
-			Route::get('{id}/Edit', 'AnalyticsController@edit');
+			Route::get('{id}/Edit', 'AnalyticsController@edit')->name('analytic.edit');
 			Route::post('{id}/Edit', 'AnalyticsController@update');
 		});
 	}

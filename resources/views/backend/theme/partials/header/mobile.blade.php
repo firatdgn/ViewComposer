@@ -1,9 +1,12 @@
-
+<!--
+	Name:Tema dosyası
+	Desc:Tema Dosyası
+-->
 <!-- begin:: Header Mobile -->
 <div id="kt_header_mobile" class="kt-header-mobile ">
 	<div class="kt-header-mobile__logo">
 		<a href="{!! url('/') !!}">
-			<img alt="Logo" src="{!! asset('media/logos/logo-dark.png') !!}" />
+			<img alt="Logo" src="{!! asset('media/logos/otokobiyim.png') !!}" />
 		</a>
 	</div>
 	<div class="kt-header-mobile__toolbar">

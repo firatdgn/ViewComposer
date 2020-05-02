@@ -17,6 +17,10 @@ class ShoppingServiceProvider extends ModuleServiceProvider
 
 	var $manageUrl = 'Backend/Shopping';
 
+	var $description = 'Firmanız içerisinde eğerki ürün satışı kullanacaksanız kullanıma sunulmuş modüldür.';
+
+	var $version = '1.0.0';
+
 	/**
 	 * Register any application services.
 	 *
